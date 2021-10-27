@@ -82,14 +82,16 @@
     \advance \N by 1
   \repeat$}
 
-\NewDocumentCommand{\Ranked}{mmO{5}}{%
+\NewDocumentCommand{\Ranked}{smmO{5}}{%
   \begingroup%
-  \ifnum#2<2
-    \fontseries{l}
-  \else\ifnum\numexpr2*#2\relax<#3\else
-    \fontseries{eb}
+  \ifnum#3<2
+    \fontseries{l}%
+  \else\ifnum\numexpr2*#3\relax<#4\else
+    \fontseries{eb}%
   \fi\fi\selectfont
-  #1\endgroup\hfill\Rank{#2}[#3]\par}
+  #2\endgroup\hfill
+  \IfBooleanT{#1}{{\scriptsize\Fa{LevelUp}}\quad}%
+  \Rank{#3}[#4]\par}
 
 \NewDocumentCommand{\Unranked}{m}{%
   \begingroup%
@@ -244,7 +246,9 @@
         % \Ranked{Linux}{3}
         % \Ranked{Git}{3}
         \Ranked{Rust}{2}
+        \Ranked*{Lean}{2}
         \Ranked{Agda}{2}
+        \Ranked*{Julia}{1}
 
         \smallskip
 
